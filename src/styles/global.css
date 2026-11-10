@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+/* COLOR SCHEMES */
+html[data-color-scheme="light"] {
+
+    /* surface colors */
+    --surface-soft: #f2e5bc;
+    --surface: #f9f5d7;
+    --surface-strong: #fbf1c7;
+    --surface-secondary: #ebdbb2;
+
+    /* edge colors: border colors */
+    --default-edge: #bdae93;
+
+    /* text body colors */
+    --body-muted: #665c54;
+    --body: #3c3836;
+    --body-strong: #282828;
+    
+    /* main color: site primary colors */
+    --primary-soft: oklch(76.637% 0.13531 109.133);
+    --primary: oklch(65.637% 0.13531 109.133);
+    --primary-strong: oklch(54.626% 0.11239 106.477);
+    
+    /* alternate color: site secondary colors */
+    --secondary-soft: oklch(68.56% 0.06586 199.543);
+    --secondary: oklch(57.56% 0.06586 199.543);
+    --secondary-strong: oklch(46.368% 0.07713 197.274);
+
+    /* meaningful colors: semantic colors */
+    /* ... */
+
+    /* fonts: from font config in 'astro.config.mjs' and <Font /> components */
+    --font-main: var(--font-alias-sans);
+    --font-old: var(--font-alias-serif);
+    --font-mono: var(--font-alias-mono);
+}
+
+@theme inline {
+    --color-surface-soft: var(--surface-soft);
+    --color-surface: var(--surface);
+    --color-surface-strong: var(--surface-strong);
+    --color-surface-secondary: var(--surface-secondary);
+
+    --color-body-muted: var(--body-muted);
+    --color-body: var(--body);
+    --color-body-strong: var(--body-strong);
+
+    --color-default-edge: var(--default-edge);
+
+    --color-primary-soft: var(--primary-soft);
+    --color-primary: var(--primary);
+    --color-primary-strong: var(--primary-strong);
+
+    --color-secondary-soft: var(--secondary-soft);
+    --color-secondary: var(--secondary);
+    --color-secondary-strong: var(--secondary-strong);
+
+    /* FONTS */
+    --font-sans: var(--font-main);
+    --font-serif: var(--font-old);
+    --font-mono: var(--font-mono);
+}
+
+@layer components {
+    .callout {
+        @apply outline-1 outline-default-edge border-l-4 rounded-xs flex flex-col;
+    }
+
+    .callout-neutral {
+        @apply  border-neutral-400;
+    }
+
+    .callout-blue {
+        @apply border-blue-400;
+    }
+    
+    .callout-green {
+        @apply border-emerald-400;
+    }
+    
+    .callout-red {
+        @apply border-red-400;
+    }
+    
+    .callout-title {
+        @apply px-2 py-0.5 font-mono font-medium text-body flex flex-row justify-start items-center gap-1;
+    }
+
+    .callout-title-neutral {
+        @apply bg-neutral-200;
+    }
+
+    .callout-title-blue {
+        @apply bg-blue-200;
+    }
+
+    .callout-title-green {
+        @apply bg-emerald-200;
+    }
+
+    .callout-title-red {
+        @apply bg-red-200;
+    }
+}
+
+@utility link-behavior {
+    @apply decoration-2 decoration-primary-soft hover:underline active:underline;
+}
+
+@utility ui {
+    @apply font-mono font-medium text-base/tight;
+}
+
+.btn {
+    @apply ui cursor-pointer px-2 py-1 text-body-muted border-2 border-default-edge rounded-sm hover:bg-surface-soft active:bg-surface-soft active:border-body-muted;
+}
+
+@utility typography-common {
+    @apply text-base/snug tracking-normal hyphens-auto;
+}
+
+.prose {
+    @apply typography-common text-body font-serif;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+    @apply mt-4 mb-2 font-bold text-body-strong text-pretty font-sans uppercase tracking-tight;
+}
+
+.prose h1 {
+    @apply text-4xl/tight;
+}
+
+.prose h2 {
+    @apply text-xl/tight;
+}
+
+.prose h3 {
+    @apply text-lg/tight;
+}
+
+.prose h4, h5, h6 {
+    @apply text-base/tight;
+}
+
+.prose p {
+    @apply mb-4;
+}
+
+.prose a {
+    @apply text-primary decoration-1 hover:underline active:underline;
+}
+
+.prose ul,
+.prose ol {
+    @apply ml-5 mb-4;
+}
+
+.prose ul {
+    @apply list-disc list-outside;
+}
+
+.prose ol {
+    @apply list-decimal list-outside;
+}
+
+.prose code {
+    @apply inline break-all font-medium text-secondary;
+}
+
+.prose pre {
+    @apply py-4 px-4 my-4 border-2 border-default-edge;
+}
+
+.prose pre code {
+    @apply bg-inherit border-none text-inherit;
+}
+
+.prose blockquote {
+    @apply px-4 py-2 mb-4 italic text-body-muted border-y border-default-edge;
+}
+
+.prose blockquote p {
+    @apply mb-0;
+}
+
+.prose blockquote cite {
+    @apply block text-body font-medium font-mono not-italic mt-2;
+}
+
+.prose aside {
+    @apply mb-4;
+}
+
+.prose aside p {
+    @apply mb-0;
+}
+
+.prose hr {
+    @apply mb-4 border-t-2 border-default-edge;
+}
+

@@ -1,0 +1,29 @@
+---
+import { render } from 'astro:content';
+
+interface Props {
+    item: any;
+}
+
+const { item } = Astro.props;
+const { headings } = await render(item);
+
+---
+
+<ul class="text-body-muted text-xs mb-2 ml-4 uppercase">
+    {   
+        headings.map(
+            (headingItem: any) => (
+                (headingItem.depth < 4) && (
+                <li class="">
+                    {/* <span class="font-bold text-body-muted mx-1">&bull;</span> */}
+                    <a 
+                        href={`/book/${item.id}#${headingItem.slug}`} class="hover:text-primary mr-2">
+                        {headingItem.text}
+                    </a>
+                </li>
+                )
+            )
+        )
+    }
+</ul>

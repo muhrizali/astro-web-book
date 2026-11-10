@@ -1,0 +1,54 @@
+---
+import { Icon } from 'astro-icon/components';
+
+type CalloutType = "neutral" | "blue" | "green" | "red";
+
+interface Props {
+    kind: CalloutType;
+    title: string | null;
+}
+
+let { kind = "neutral", title = null } = Astro.props;
+
+function getIcon(kind: CalloutType) {
+    switch(kind) {
+        case "neutral":
+            title = title ?? "Note";
+            return "info";
+        case "blue":
+            title = title ?? "Info";
+            return "lightbulb";
+        case "green":
+            title = title ?? "Tip";
+            return "check-circle";
+        case "red":
+            title = title ?? "Warning";
+            return "warning";
+    }
+}
+/*
+    note: info
+    tip: lightbulb / tips / tooltip
+    success: check-circle
+    error: warning / error
+*/
+
+---
+
+<aside
+    data-kind={kind}
+    class={`callout callout-${kind}`}>
+    <div 
+        class={`callout-title callout-title-${kind}`}>
+        <span>
+            <Icon class="" name={`material-symbols:${getIcon(kind)}`} />
+        </span>
+        <span>
+            {title}
+        </span>
+    </div>
+    <div 
+        class="px-2 py-1">
+        <slot></slot>
+    </div>
+</aside>

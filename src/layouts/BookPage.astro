@@ -1,0 +1,16 @@
+---
+import SiteLayout from "./SiteLayout.astro";
+import Prose from "../components/Prose.astro";
+import NavBook from "../components/NavBook.astro";
+import { Node } from "../scripts/utils";
+
+interface Props {
+    itemNode: Node;
+}
+
+const { itemNode } = Astro.props;
+---
+<SiteLayout>
+    <slot></slot>
+    <NavBook itemNode={itemNode} />
+</SiteLayout>

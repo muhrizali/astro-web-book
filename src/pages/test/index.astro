@@ -1,0 +1,12 @@
+---
+import { getUnitCollection, Node } from "../../scripts/utils";
+
+const unitNodes = await getUnitCollection();
+---
+<ul>
+    {unitNodes.map(
+        (node: Node) => (
+            <li>Current: {node.value.id}, Left: {node.leftNode?.value.id}, Right: {node.rightNode?.value.id}</li>
+        )
+    )}
+</ul>

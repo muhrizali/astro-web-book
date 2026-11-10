@@ -1,0 +1,20 @@
+---
+import TOCListItem from "./TOCListItem.astro";
+import { getUnitCollection, Node } from "../scripts/utils";
+
+const collection = await getUnitCollection();
+
+interface Props {
+    showTopics?: boolean;
+}
+
+const { showTopics = false } = Astro.props;
+---
+
+<ul class="mb-4 font-mono text-body">
+    {
+        collection.map((node: Node) => (
+            <TOCListItem item={node.value} showTopics={showTopics} />
+        ))
+    }
+</ul>

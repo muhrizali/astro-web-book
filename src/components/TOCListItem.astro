@@ -1,0 +1,55 @@
+---
+import TOCListItemTopics from './TOCListItemTopics.astro';
+import { render } from 'astro:content';
+
+interface Props {
+    item: any;
+    showTopics: boolean;
+}
+
+const { item, showTopics } = Astro.props;
+
+---
+
+<li class="">
+    <!-- PAGE -->
+    {
+        (item.data["type"] === "PAGE") && (
+            <a href={`/book/${item.id}`} class="decoration-2 decoration-primary hover:underline">
+                {item.data["title"]}
+            </a>
+        )
+    }
+
+    <!-- PART -->
+    {
+        (item.data["type"] === "PART") && (
+            <a 
+                href={`/book/${item.id}`} 
+                class="inline-block mt-2 decoration-2 decoration-primary hover:underline font-semibold">
+                Part {item.data["partNum"]}: {item.data["title"]}
+            </a>
+
+        )
+    }
+
+    <!-- CHAPTER -->
+    {
+        (item.data["type"] === "CHAPTER") && (
+            <div class="flex flex-row">
+                <div class="pr-4">{item.data["chapterNum"]}.</div>
+                
+                <div class="block">
+                    <a href={`/book/${item.id}`} class="decoration-2 decoration-primary hover:underline">
+                        {item.data["title"]}
+                    </a>
+
+                    { showTopics && (
+                        <TOCListItemTopics item={item} />
+                    ) }
+                
+                </div>
+            </div>
+        )
+    }
+</li>

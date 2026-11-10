@@ -1,0 +1,21 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+    citation: string | null;    
+}
+
+const { citation = null } = Astro.props;
+
+---
+<blockquote>
+    <div class="mb-1 text-primary-soft/80">
+        <Icon class="text-3xl" name="material-symbols:format-quote" />
+    </div>
+    <slot></slot>
+    { citation && (
+        <cite>
+            &mdash; {citation}
+        </cite>
+    ) }
+</blockquote>
