@@ -1,29 +1,40 @@
 ---
 
-import TOC from "../components/TOC.astro";
+import Header from "../components/Header.astro";
+
+
 const links = [
-    { label: "Home", link: "/" },
-    { label: "Book", link: "/book" },
-    { label: "Blog", link: "/blog" },
-    { label: "About", link: "/about" },
+    { id: "home", label: "Home", link: "/" },
+    { id: "book", label: "Book", link: "/book" },
+    { id: "blog", label: "Blog", link: "/blog" },
+    { id: "about", label: "About", link: "/about" },
 ];
+
+function currentPage(linkPath: string) {
+    const currentPath = Astro.url.pathname;
+    if (linkPath !== "/") {
+        return currentPath.startsWith(linkPath);
+    } else {
+        return currentPath === "/";
+    }
+}
+
+
 ---
 
 <nav
-    id="ui-left-sidebar"
-    class="hidden sm:block flex-none px-6 py-4 border-default-edge border-x-2 bg-surface-secondary/40 min-w-60 max-w-fit">
-    <header class="mb-2">
-        <p class="text-2xl/tight font-bold text-body-muted">
-            HEADER
-        </p>
-    </header>
+    class="flex-none px-4 sm:px-6 py-4 sm:py-8 border-default-edge border-y-2 sm:border-y-0 sm:border-x-2 bg-surface-soft w-full sm:min-w-60 sm:max-w-fit h-fit sm:min-h-screen">
+    <Header />
     <ul
-        class="w-fit flex flex-row sm:flex-col gap-2 sm:gap-1 text-body-muted font-semibold font-mono">
+        class="w-full sm:w-fit flex flex-row sm:flex-col gap-2 sm:gap-1 text-body-muted font-semibold font-mono">
     {
         links.map((item) => (
             <li>
-                <a href={item.link} class="link-behavior uppercase">
-                    {item.label}
+                <a 
+                    href={item.link}
+                    data-current={currentPage(item.link)} 
+                    class="link-behavior uppercase">
+                        {item.label}
                 </a>
             </li>
         ))

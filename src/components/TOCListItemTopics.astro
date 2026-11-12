@@ -17,7 +17,8 @@ const { headings } = await render(item);
                 (headingItem.depth < 4) && (
                 <li class="">
                     {/* <span class="font-bold text-body-muted mx-1">&bull;</span> */}
-                    <a 
+                    <a
+                        data-astro-prefetch="false"
                         href={`/book/${item.id}#${headingItem.slug}`} class="hover:text-primary mr-2">
                         {headingItem.text}
                     </a>

@@ -19,6 +19,7 @@
     "astro": "^7.4.7",
     "astro-icon": "^1.2.0",
     "es-toolkit": "^1.53.2",
+    "htmx.org": "^4.0.1",
     "tailwindcss": "^4.3.5"
   }
 }

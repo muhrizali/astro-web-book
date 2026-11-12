@@ -4,31 +4,45 @@
 html[data-color-scheme="light"] {
 
     /* surface colors */
-    --surface-soft: #f2e5bc;
-    --surface: #f9f5d7;
-    --surface-strong: #fbf1c7;
+    --surface-soft: oklch(94.552% 0.05536 96.171);
+    --surface: oklch(99% 0.03931 100.895);
+    --surface-strong: oklch(94% 0.0565 89.243);
     --surface-secondary: #ebdbb2;
 
     /* edge colors: border colors */
-    --default-edge: #bdae93;
+    /* --default-edge: #bdae93; */
+    --default-edge: #a89984;
 
     /* text body colors */
     --body-muted: #665c54;
+    /* --body-muted: #504945; */
     --body: #3c3836;
     --body-strong: #282828;
     
     /* main color: site primary colors */
-    --primary-soft: oklch(76.637% 0.13531 109.133);
-    --primary: oklch(65.637% 0.13531 109.133);
-    --primary-strong: oklch(54.626% 0.11239 106.477);
+    --primary: #d65d0e;
+    --primary-strong: #af3a03;
     
     /* alternate color: site secondary colors */
-    --secondary-soft: oklch(68.56% 0.06586 199.543);
-    --secondary: oklch(57.56% 0.06586 199.543);
-    --secondary-strong: oklch(46.368% 0.07713 197.274);
+    --secondary: #458588;
+    --secondary-strong: #076668;
 
     /* meaningful colors: semantic colors */
     /* ... */
+    --neutral: #928374;
+    --neutral-strong: #7c6f64;
+
+    --success: #98971a;
+    --success-strong: #79740e;
+
+    --info: #458588;
+    --info-strong: #076668;
+
+    --warning: #d79921;
+    --warning-strong: #b57614;
+
+    --danger: #cc241d;
+    --danger-strong: #9d0006;
 
     /* fonts: from font config in 'astro.config.mjs' and <Font /> components */
     --font-main: var(--font-alias-sans);
@@ -48,13 +62,27 @@ html[data-color-scheme="light"] {
 
     --color-default-edge: var(--default-edge);
 
-    --color-primary-soft: var(--primary-soft);
     --color-primary: var(--primary);
     --color-primary-strong: var(--primary-strong);
 
-    --color-secondary-soft: var(--secondary-soft);
     --color-secondary: var(--secondary);
     --color-secondary-strong: var(--secondary-strong);
+
+    --color-neutral: var(--neutral);
+    --color-neutral-strong: var(--neutral-strong);
+
+    --color-success: var(--success);
+    --color-success-strong: var(--success-strong);
+
+    --color-info: var(--info);
+    --color-info-strong: var(--info-strong);
+    
+    --color-warning: var(--warning);
+    --color-warning-strong: var(--warning-strong);
+
+    --color-danger: var(--danger);
+    --color-danger-strong: var(--danger-strong);
+
 
     /* FONTS */
     --font-sans: var(--font-main);
@@ -64,48 +92,60 @@ html[data-color-scheme="light"] {
 
 @layer components {
     .callout {
-        @apply outline-1 outline-default-edge border-l-4 rounded-xs flex flex-col;
+        @apply mb-4 border border-default-edge border-l-6 rounded-xs flex flex-col;
     }
 
     .callout-neutral {
-        @apply  border-neutral-400;
+        @apply border-l-neutral/80;
     }
 
-    .callout-blue {
-        @apply border-blue-400;
+    .callout-info {
+        @apply border-l-info/80;
     }
     
-    .callout-green {
-        @apply border-emerald-400;
+    .callout-success {
+        @apply border-l-success/80;
     }
     
-    .callout-red {
-        @apply border-red-400;
+    .callout-danger {
+        @apply border-l-danger/80;
+    }
+    
+    .callout-warning {
+        @apply border-l-warning/80;
     }
     
     .callout-title {
-        @apply px-2 py-0.5 font-mono font-medium text-body flex flex-row justify-start items-center gap-1;
+        @apply pl-2 py-0.5 font-mono font-medium text-body text-sm flex flex-row justify-start items-center gap-1;
     }
 
     .callout-title-neutral {
-        @apply bg-neutral-200;
+        @apply bg-neutral/20;
     }
 
-    .callout-title-blue {
-        @apply bg-blue-200;
+    .callout-title-info {
+        @apply bg-info/20;
     }
 
-    .callout-title-green {
-        @apply bg-emerald-200;
+    .callout-title-success {
+        @apply bg-success/20;
     }
 
-    .callout-title-red {
-        @apply bg-red-200;
+    .callout-title-danger {
+        @apply bg-danger/20;
+    }
+
+    .callout-title-warning {
+        @apply bg-warning/20;
+    }
+
+    .callout-body {
+        @apply px-2 py-1 text-sm/snug;
     }
 }
 
 @utility link-behavior {
-    @apply decoration-2 decoration-primary-soft hover:underline active:underline;
+    @apply decoration-2 decoration-primary/60 hover:underline active:underline data-[current=true]:underline;
 }
 
 @utility ui {
@@ -130,7 +170,7 @@ html[data-color-scheme="light"] {
 .prose h4,
 .prose h5,
 .prose h6 {
-    @apply mt-4 mb-2 font-bold text-body-strong text-pretty font-sans uppercase tracking-tight;
+    @apply mt-4 mb-2 font-bold text-body-strong text-pretty font-sans tracking-tight;
 }
 
 .prose h1 {
@@ -154,7 +194,7 @@ html[data-color-scheme="light"] {
 }
 
 .prose a {
-    @apply text-primary decoration-1 hover:underline active:underline;
+    @apply text-info decoration-2 hover:underline active:underline;
 }
 
 .prose ul,
@@ -171,11 +211,11 @@ html[data-color-scheme="light"] {
 }
 
 .prose code {
-    @apply inline break-all font-medium text-secondary;
+    @apply inline break-all font-medium text-success;
 }
 
 .prose pre {
-    @apply py-4 px-4 my-4 border-2 border-default-edge;
+    @apply px-3 py-2 my-4 border-2 border-default-edge;
 }
 
 .prose pre code {
@@ -191,12 +231,12 @@ html[data-color-scheme="light"] {
 }
 
 .prose blockquote cite {
-    @apply block text-body font-medium font-mono not-italic mt-2;
+    @apply block text-sm text-body font-medium font-mono not-italic mt-2;
 }
 
-.prose aside {
-    @apply mb-4;
-}
+/* .prose aside {
+    @apply mb-0;
+} */
 
 .prose aside p {
     @apply mb-0;

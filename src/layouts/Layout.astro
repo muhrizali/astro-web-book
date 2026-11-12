@@ -15,13 +15,20 @@ import { Font } from "astro:assets";
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Title</title>
 
+		<!-- HTMX -->
+		<script>
+			import 'htmx.org';
+		</script>
+
 		<!-- Astro Font Config -->
 		<Font cssVariable="--font-alias-sans" />
 		<Font cssVariable="--font-alias-serif" />
 		<Font cssVariable="--font-alias-mono" />
 
 	</head>
-	<body class="border-0 flex flex-col sm:flex-row max-w-5xl mx-auto bg-surface/20">
+	<body
+		hx-boost:inherited="true"
+		class="border-0 flex flex-col sm:flex-row max-w-5xl mx-auto bg-surface h-full sm:h-screen overflow-y-scroll sm:overflow-hidden">
 		<slot />
 	</body>
 </html>

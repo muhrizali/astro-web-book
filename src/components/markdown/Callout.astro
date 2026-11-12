@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 
-type CalloutType = "neutral" | "blue" | "green" | "red";
+type CalloutType = "neutral" | "info" | "success" | "warning" | "danger";
 
 interface Props {
     kind: CalloutType;
@@ -15,15 +15,18 @@ function getIcon(kind: CalloutType) {
         case "neutral":
             title = title ?? "Note";
             return "info";
-        case "blue":
+        case "info":
             title = title ?? "Info";
             return "lightbulb";
-        case "green":
+        case "success":
             title = title ?? "Tip";
             return "check-circle";
-        case "red":
+        case "warning":
             title = title ?? "Warning";
             return "warning";
+        case "danger":
+            title = title ?? "Danger";
+            return "dangerous";
     }
 }
 /*
@@ -48,7 +51,7 @@ function getIcon(kind: CalloutType) {
         </span>
     </div>
     <div 
-        class="px-2 py-1">
+        class="callout-body">
         <slot></slot>
     </div>
 </aside>

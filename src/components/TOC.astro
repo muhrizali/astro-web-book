@@ -6,15 +6,16 @@ const collection = await getUnitCollection();
 
 interface Props {
     showTopics?: boolean;
+    currentNode?: Node;
 }
 
-const { showTopics = false } = Astro.props;
+const { showTopics = false, currentNode = null } = Astro.props;
 ---
 
 <ul class="mb-4 font-mono text-body">
     {
         collection.map((node: Node) => (
-            <TOCListItem item={node.value} showTopics={showTopics} />
+            <TOCListItem current={currentNode?.value} item={node.value} showTopics={showTopics} />
         ))
     }
 </ul>
