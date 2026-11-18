@@ -1,8 +1,20 @@
 ---
-layout: "../../layouts/SiteLayout.astro"
+layout: "../../layouts/MarkdownPage.astro"
+
+title: "Book"
+description: "The description of the book; gives information about text written inside the book, why was it written and the authors of the book."
+path: "/book"
+specifics:
+    schema: "WebPage"
+crumbItems:
+    - label: "Home"
+      path: "/"
+    - label: "Book"
+      path: "/book"
+
 ---
-import TOC from "../../components/TOC.astro";
 import Prose from "../../components/Prose.astro";
+import TOC from "../../components/TOC.astro";
 
 <Prose>
 # Book
@@ -12,8 +24,8 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 
 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a 1914 Cicero translation and scrambled it to make dummy text for Letraset's Body Type sheets. It has survived not only many decades, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised thanks to these sheets and more recently with desktop publishing software like Aldus PageMaker and Microsoft Word including versions of Lorem Ipsum.
 
----
-</Prose>
-<TOC showTopics={true} />
+**Book:** [Start Here](/book/000-pre-page-0)\
+**Navigation:** [Table Of Contents](/book/contents)
 
+</Prose>
 

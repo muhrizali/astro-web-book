@@ -18,26 +18,26 @@ function currentPage(linkPath: string) {
         return currentPath === "/";
     }
 }
-
-
 ---
 
 <nav
-    class="flex-none px-4 sm:px-6 py-4 sm:py-8 border-default-edge border-y-2 sm:border-y-0 sm:border-x-2 bg-surface-soft w-full sm:min-w-60 sm:max-w-fit h-fit sm:min-h-screen">
-    <Header />
-    <ul
-        class="w-full sm:w-fit flex flex-row sm:flex-col gap-2 sm:gap-1 text-body-muted font-semibold font-mono">
-    {
-        links.map((item) => (
-            <li>
-                <a 
-                    href={item.link}
-                    data-current={currentPage(item.link)} 
-                    class="link-behavior uppercase">
-                        {item.label}
-                </a>
-            </li>
-        ))
-    }
-    </ul>
+    class="flex-none px-4 pb-4 pt-6 border-default-edge border-y-2 bg-surface-soft w-full h-fit">
+    <div class="max-w-3xl mx-auto">
+        <Header />
+        <ul
+            class="w-full sm:w-fit flex flex-row sm:flex-row gap-3 text-body-muted font-semibold font-mono">
+            {
+                links.map((item) => (
+                    <li>
+                        <a 
+                            href={item.link}
+                            data-current={currentPage(item.link)} 
+                            class="link-behavior uppercase">
+                                {item.label}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
 </nav>

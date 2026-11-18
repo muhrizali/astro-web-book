@@ -1,0 +1,52 @@
+---
+import { render } from 'astro:content';
+import { getBlogCollection, getBlogCollectionItem } from '../../scripts/utils';
+import BlogPage from '../../layouts/BlogPage.astro';
+import Prose from '../../components/Prose.astro';
+import { toPageMetadata, createArticleMetadata } from '../../utils/schema';
+
+export async function getStaticPaths () {
+    const collection = await getBlogCollection();
+    return collection.map((item) => ({ params: { 'slug': item.id } }));
+}
+
+const { slug } = Astro.params;
+const item = await getBlogCollectionItem(slug);
+
+const metadata = createArticleMetadata({
+    path: `/blog/${item.id}`,
+    title: item.data.title,
+    description: item.data.description,
+    crumbItems: [
+        { label: "Home", path: "/" },
+        { label: "Blog", path: "/blog" },
+        { label: item.data.title, path: `/blog/${item.id}` },
+    ],
+    specifics: {
+        author: item.data.author,
+        datePublished: item.data.datePublished,
+        dateModified: item.data.dateModified,
+        category: item.data.category,
+        tags: item.data.tags,
+        schema: "BlogPosting",
+    },
+})
+
+
+const { Content } = await render(item);
+
+---
+
+<BlogPage metadata={metadata} item={item}>
+    <div class="mt-4 mb-10 font-serif text-lg">
+        <p 
+            class="text-body-muted mb-0 font-medium font-serif">
+            Technology
+        </p>
+
+        <h1 class="mt-2 uppercase text-4xl font-bold text-body-strong font-sans tracking-tight">{item.data["title"]}</h1>
+    </div>
+    <Prose>
+        <Content />
+    </Prose>
+</BlogPage>

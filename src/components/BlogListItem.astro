@@ -1,0 +1,34 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+
+interface Props {
+    item: CollectionEntry<'BLOGS'>;
+}
+
+const { item } = Astro.props;
+
+---
+<li>
+    <a 
+        href={`/blog/${item.id}`} 
+        class="block border border-transparent hover:border-default-edge active:border-default-edge">
+        <article 
+            class="p-2 font-serif text-base/tight group hover:bg-surface-soft active:bg-surface-soft">
+            <h3 
+                class="font-sans font-bold text-lg/tight text-body-strong group-hover:text-primary-strong group-active:text-primary-strong text-pretty mb-1">
+                {item.data.title}
+            </h3>
+            <p 
+                class="line-clamp-2 text-body-muted group-hover:text-body group-active:text-body text-sm mb-1">
+                {item.data.description}
+            </p>
+            <div 
+                class="font-mono text-right text-xs/tight justify-start items-center text-body-muted gap-1">
+                    <span>
+                        20th July 2026
+                    </span>
+            </div>
+        </article>
+    </a>
+</li>

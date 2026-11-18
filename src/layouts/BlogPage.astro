@@ -1,0 +1,14 @@
+---
+import SitePage from "./SitePage.astro";
+
+interface Props {
+    item: any;
+    metadata: any;
+}
+
+const { item, metadata } = Astro.props;
+
+---
+<SitePage metadata={metadata}>
+    <slot></slot>
+</SitePage>

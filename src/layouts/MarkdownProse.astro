@@ -1,0 +1,17 @@
+---
+import SitePage from "./SitePage.astro";
+import Prose from "../components/Prose.astro";
+import { type MarkdownLayoutProps } from "astro";
+import { toPageMetadata, type MarkdownPageProps } from "../utils/schema";
+
+type Props = MarkdownLayoutProps<MarkdownPageProps>;
+const { frontmatter } = Astro.props;
+
+const metadata = toPageMetadata(frontmatter);
+
+---
+<SitePage metadata={metadata}>
+    <Prose>
+        <slot></slot>
+    </Prose>
+</SitePage>

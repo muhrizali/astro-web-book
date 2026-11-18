@@ -1,0 +1,28 @@
+---
+import { Font } from "astro:assets";
+import HeadScripts from "./HeadScripts.astro";
+import HeadMetadata from "./HeadMetadata.astro";
+
+interface Props {
+    metadata: any;
+}
+
+const { metadata } = Astro.props;
+
+---
+
+<head>
+    <!-- Metadata/SEO -->
+    <HeadMetadata metadata={metadata} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <!-- Scripts -->
+    <HeadScripts />
+
+    <!-- Astro Font Config -->
+    <Font cssVariable="--font-alias-sans" />
+    <Font cssVariable="--font-alias-serif" />
+    <Font cssVariable="--font-alias-mono" />
+</head>

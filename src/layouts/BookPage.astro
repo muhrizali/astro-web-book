@@ -1,16 +1,19 @@
 ---
-import SiteLayout from "./SiteLayout.astro";
+import SitePage from "./SitePage.astro";
 import Prose from "../components/Prose.astro";
 import NavBook from "../components/NavBook.astro";
 import { Node } from "../scripts/utils";
+import type { CollectionEntry } from "astro:content";
 
 interface Props {
-    itemNode: Node;
+    itemNode: Node<CollectionEntry<"UNITS">>;
+    metadata: any;
 }
 
-const { itemNode } = Astro.props;
+const { itemNode, metadata } = Astro.props;
+
 ---
-<SiteLayout>
+<SitePage metadata={metadata}>
     <slot></slot>
     <NavBook itemNode={itemNode} />
-</SiteLayout>
+</SitePage>

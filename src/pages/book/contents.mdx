@@ -1,0 +1,25 @@
+---
+layout: "../../layouts/MarkdownPage.astro"
+
+title: "Contents"
+description: "Table of contents; collection of pages, parts and chapters inside the book in serialized order"
+path: "/book/contents"
+specifics:
+    schema: "WebPage"
+crumbItems:
+    - label: "Home"
+      path: "/"
+    - label: "Book"
+      path: "/book"
+    - label: "Contents"
+      path: "/book/contents"
+
+---
+import Prose from "../../components/Prose.astro";
+import TOC from "../../components/TOC.astro";
+
+<Prose>
+# Contents
+</Prose>
+<TOC />
+

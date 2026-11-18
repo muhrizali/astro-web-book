@@ -1,30 +1,48 @@
 ---
 import { render } from 'astro:content';
-import { getUnitCollection, getUnitCollectionItem, Node } from '../../scripts/utils';
+import { getNodesFrom, getUnitCollection, getUnitNodesCollectionItem, Node } from '../../scripts/utils';
+import { createWebPageMetadata } from '../../utils/schema';
 import BookPage from '../../layouts/BookPage.astro';
 import Prose from '../../components/Prose.astro';
 
 export async function getStaticPaths () {
-    const allUnitNodes = await getUnitCollection();
-    return allUnitNodes.map((node: Node) => ({ params: { 'slug': node.value['id'] } }));
+    const collection = await getUnitCollection();
+    return collection.map((item) => ({ params: { 'slug': item.id } }));
 }
 
 const { slug } = Astro.params;
-const unitNode = await getUnitCollectionItem(slug);
+const unitNode = await getUnitNodesCollectionItem(slug);
 
 if (!unitNode) {
-    throw new Error("Collection Item Not Found");
+    throw new Error("Unit Collection Item Not Found");
 }
+
+const item = (unitNode.value);
+
+const metadata = createWebPageMetadata({
+    title: item.data.title,
+    description: `Book Page: ${item.data.title}`,
+    path: `/book/${item.id}`,
+    specifics: {
+        schema: "WebPage"
+    },
+    crumbItems: [
+        { label: "Home", path: "/" },
+        { label: "Book", path: "/book" },
+        { label: `${item.data.title}`, path: `/book/${item.id}` },
+    ],
+});
 
 const { Content } = await render(unitNode.value);
 
 ---
 
-<BookPage itemNode={unitNode}>
+<BookPage metadata={metadata} itemNode={unitNode}>
     <div class="mt-4 mb-10 font-serif text-xl">
         <!-- Chapter Header -->
         { (unitNode.value.data["type"] === "CHAPTER") && (
-            <p class="text-body-muted italic mb-0 font-medium">
+            <p 
+                class="text-body-muted italic mb-0 font-medium">
                 Chapter {unitNode.value.data["chapterNum"]}
             </p>
         ) }
@@ -37,7 +55,7 @@ const { Content } = await render(unitNode.value);
             </p>
         ) }
 
-        <h1 class="uppercase text-4xl font-bold text-body-strong font-sans tracking-tight">{unitNode.value.data["title"]}</h1>
+        <h1 class="mt-2 uppercase text-4xl font-bold text-body-strong font-sans tracking-tight">{unitNode.value.data["title"]}</h1>
     </div>
     <Prose>
         <Content />

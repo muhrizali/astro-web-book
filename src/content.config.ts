@@ -30,11 +30,7 @@ const units = defineCollection({
         
         // metadata
         title: z.string(), 
-        description: z.string(),
-        datePublished: z.string(),
-        dateModified: z.string(),
         isDraft: z.boolean(),
-        tags: z.array(z.string()).optional(),
         
         // chapter number
         chapterNum: z.number().optional(),
@@ -47,6 +43,27 @@ const units = defineCollection({
     })
 });
 
+const blogs = defineCollection({
+    loader: glob({ base: "./src/content/blog", pattern: "*.{md,mdx}" }),
+    schema: z.object({
+        // metadata
+        title: z.string(), 
+        description: z.string(),
+        author: z.string(),
+        
+        category: z.string(), // top-level category; "Technology"
+        tags: z.array(z.string()), // 
+        
+        datePublished: z.string(),
+        dateModified: z.string(),
+
+        isDraft: z.boolean(),
+
+        // ...
+    })
+});
+
 export const collections = { 
     'UNITS': units,
+    'BLOGS': blogs,
 };

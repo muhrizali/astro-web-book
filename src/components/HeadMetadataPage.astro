@@ -1,0 +1,18 @@
+---
+import { assembleGraph } from "@jdevalk/seo-graph-core";
+import { buildTillWebPagePiece, type WebPageMetadata } from "../utils/schema";
+
+interface Props {
+    metadata: WebPageMetadata;
+}
+
+const { metadata } = Astro.props;
+
+const pieces = buildTillWebPagePiece({ data: metadata });
+const graph = assembleGraph(pieces);
+
+---
+<meta property="og:type" content="website" />
+
+<!-- schema json-ld graph: creating and linking entities -->
+<script type="application/ld+json" set:html={JSON.stringify(graph)} />

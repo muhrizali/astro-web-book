@@ -145,7 +145,7 @@ html[data-color-scheme="light"] {
 }
 
 @utility link-behavior {
-    @apply decoration-2 decoration-primary/60 hover:underline active:underline data-[current=true]:underline;
+    @apply decoration-2 decoration-primary hover:text-primary active:text-primary data-[current=true]:text-primary;
 }
 
 @utility ui {
@@ -210,12 +210,16 @@ html[data-color-scheme="light"] {
     @apply list-decimal list-outside;
 }
 
+.prose li {
+    @apply mb-1;
+}
+
 .prose code {
-    @apply inline break-all font-medium text-success;
+    @apply text-success;
 }
 
 .prose pre {
-    @apply px-3 py-2 my-4 border-2 border-default-edge;
+    @apply px-3 py-2 my-4 border-2 border-default-edge rounded-xs;
 }
 
 .prose pre code {

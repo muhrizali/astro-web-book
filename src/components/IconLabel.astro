@@ -1,0 +1,19 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    icon: string;
+    label: string;
+}
+
+const {icon, label} = Astro.props;
+
+---
+<div class="flex flex-row justify-center items-center">
+    <span>
+        <Icon name={`material-symbols:${icon}`} />
+    </span>
+    <span>
+        {label}
+    </span>
+</div>

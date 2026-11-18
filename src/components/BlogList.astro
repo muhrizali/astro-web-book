@@ -1,0 +1,16 @@
+---
+import BlogListItem from "./BlogListItem.astro";
+import { getBlogCollection } from "../scripts/utils";
+
+const collection = await getBlogCollection();
+
+---
+<ul class="flex flex-col mb-10">
+    {
+        collection.map(
+            (item) => (
+                <BlogListItem item={item} />
+            )
+        )
+    }
+</ul>

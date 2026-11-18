@@ -1,0 +1,55 @@
+---
+import { assembleGraph, type GraphEntity } from "@jdevalk/seo-graph-core";
+import { 
+    BASE, 
+    buildTillWebPagePiece,
+    buildTillArticlePiece,
+    createWebPageMetadata,
+    type WebPageMetadata, 
+    type ArticleMetadata,
+    type CoreMetadata,
+} from "../utils/schema";
+import HeadMetadataPage from "./HeadMetadataPage.astro";
+import HeadMetadataPost from "./HeadMetadataPost.astro";
+
+interface Props {
+    metadata: CoreMetadata;
+}
+const { metadata } = Astro.props;
+
+if (!metadata) {
+    throw new Error("Metadata Must Not Be Null");
+}
+
+// meta tags: basic fundamental tags for html
+// open-graph meta tags: metametadata used when sharing the object on social media
+// json-ld graph: graph that tells crawlers how objects on website is linked to one another
+
+---
+
+<!-- Common Metadata: WebPage + Article -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="generator" content={Astro.generator} />
+<link rel="canonical" href={`${BASE.SITE_URL}${metadata.path}`} />
+
+<!-- proper meta tags -->
+<title>{metadata.title}</title>
+<meta name="description" content={metadata.description} />
+<meta name="robots" content="index, follow" />
+
+<!-- open-graph: basic object meta tags -->
+<meta property="og:url" content={`${BASE.SITE_URL}${metadata.path}`} />
+<meta property="og:title" content={metadata.title} />
+<meta property="og:description" content={metadata.description} />
+<meta property="og:site_name" content={BASE.SITE_NAME} />
+<!-- <meta property="og:image" content="featured image url"> -->
+
+{
+    (metadata.type === "PAGE")
+    // metadata for pages: web-pages, profile pages, collection pages
+    ? <HeadMetadataPage metadata={metadata} />
+    // metadata for posts: article, blog-posting, news-article, techarticle
+    : <HeadMetadataPost metadata={metadata} />
+}
+

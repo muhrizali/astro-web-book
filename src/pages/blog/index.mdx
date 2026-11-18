@@ -1,7 +1,22 @@
 ---
-layout: "../../layouts/SitePage.astro"
----
+layout: "../../layouts/MarkdownPage.astro"
 
+title: "Blog"
+description: "The blog page; contains the collection of all the blog posts that I made on this site."
+path: "/blog"
+specifics:
+    schema: "CollectionPage"
+crumbItems:
+    - label: "Home"
+      path: "/"
+    - label: "Blog"
+      path: "/blog"
+
+---
+import BlogList from "../../components/BlogList.astro";
+import Prose from "../../components/Prose.astro";
+
+<Prose>
 # Blog
 
 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a 1914 Cicero translation and scrambled it to make dummy text for Letraset's Body Type sheets. It has survived not only many decades, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised thanks to these sheets and more recently with desktop publishing software like Aldus PageMaker and Microsoft Word including versions of Lorem Ipsum.
@@ -10,3 +25,6 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 
 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a 1914 Cicero translation and scrambled it to make dummy text for Letraset's Body Type sheets. It has survived not only many decades, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised thanks to these sheets and more recently with desktop publishing software like Aldus PageMaker and Microsoft Word including versions of Lorem Ipsum.
 
+---
+</Prose>
+<BlogList />

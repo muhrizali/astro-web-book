@@ -85,4 +85,5 @@ export default defineConfig({
   ],
 
   integrations: [icon(), mdx()],
+  // integrations: [icon()],
 });

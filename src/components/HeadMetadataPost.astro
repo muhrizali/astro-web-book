@@ -1,0 +1,31 @@
+---
+import { assembleGraph } from "@jdevalk/seo-graph-core";
+import { buildTillArticlePiece, type ArticleMetadata } from "../utils/schema";
+
+interface Props {
+    metadata: ArticleMetadata;
+}
+
+const { metadata } = Astro.props;
+
+const pieces = buildTillArticlePiece({ data: metadata });
+const graph = assembleGraph(pieces);
+
+---
+<meta name="author" content={metadata.specifics.author} />
+
+<meta property="og:type" content="article" />
+<meta property="article:author" content={metadata.specifics.author} />
+<meta property="article:section" content={metadata.specifics.category} />
+<meta property="article:published_time" content={metadata.specifics.datePublished} />
+<meta property="article:modified_time" content={metadata.specifics.dateModified} />
+{
+    metadata.specifics.tags.map(
+        (tag: string) => (
+            <meta property="article:tag" content={tag} />
+        )
+    )
+}
+
+<!-- schema json-ld graph: creating and linking entities -->
+<script type="application/ld+json" set:html={JSON.stringify(graph)} />

@@ -1,9 +1,21 @@
 ---
-import SiteLayout from "./SiteLayout.astro";
-import Prose from "../components/Prose.astro";
+import Layout from "./Layout.astro";
+import Nav from "../components/Nav.astro";
+import Main from "../components/Main.astro";
+// import NavSite from "../components/NavSite.astro";
+// import Footer from "../components/Footer.astro";
+
+interface Props {
+    metadata: any;
+}
+
+const { metadata } = Astro.props;
+
 ---
-<SiteLayout>
-    <Prose>
-        <slot></slot>
-    </Prose>
-</SiteLayout>
+<Layout metadata={metadata}>
+    <Nav />
+    <Main>
+        <slot />
+    </Main>
+    <!-- <Footer /> -->
+</Layout>

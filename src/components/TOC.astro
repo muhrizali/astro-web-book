@@ -1,12 +1,13 @@
 ---
 import TOCListItem from "./TOCListItem.astro";
-import { getUnitCollection, Node } from "../scripts/utils";
+import { getUnitNodesCollection, Node } from "../scripts/utils";
+import type { CollectionEntry } from "astro:content";
 
-const collection = await getUnitCollection();
+const nodesCollection = await getUnitNodesCollection();
 
 interface Props {
     showTopics?: boolean;
-    currentNode?: Node;
+    currentNode?: Node<CollectionEntry<'UNITS'>>;
 }
 
 const { showTopics = false, currentNode = null } = Astro.props;
@@ -14,7 +15,7 @@ const { showTopics = false, currentNode = null } = Astro.props;
 
 <ul class="mb-4 font-mono text-body">
     {
-        collection.map((node: Node) => (
+        nodesCollection.map((node) => (
             <TOCListItem current={currentNode?.value} item={node.value} showTopics={showTopics} />
         ))
     }
